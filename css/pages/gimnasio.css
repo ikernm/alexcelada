@@ -1,0 +1,444 @@
+/* ============================================================
+   HERO — overrides (base en components.css)
+   imagen más oscura y sin object-position por defecto
+   ============================================================ */
+
+.hero__image {
+  width: 60%;
+  object-position: 50% 50%;
+}
+
+/* gradiente más intenso — la imagen del gym es muy detallada
+   y necesita más oscuridad para que el texto sea legible */
+.hero__overlay {
+  background: linear-gradient(to right, rgba(0,0,0,0.85) 40%, rgba(0,0,0,0.4) 80%);
+}
+
+
+/* ============================================================
+   STATS BAR
+   ============================================================ */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas iguales */
+  background: var(--off-black);
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.stats__item {
+  padding: var(--space-8) var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  /* borde derecho en todos los items menos el último —
+     nth-child evita añadir una clase extra en el HTML */
+}
+
+.stats__item:not(:last-child) {
+  border-right: 1px solid var(--border-dark);
+}
+
+.stats__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+  order: -1;
+  min-height: 2.5em; /* reserva espacio para 2 líneas — evita que el valor suba cuando el label es corto */
+}
+
+.stats__value {
+  font-family: var(--font-body);
+  font-size: var(--text-4xl);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1;
+}
+
+
+/* ============================================================
+   SERVICIOS
+   ============================================================ */
+
+.services {
+  background: var(--off-black);
+  padding: var(--space-20) var(--space-16);
+}
+
+.services__header {
+  margin-bottom: var(--space-12);
+}
+
+.services__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+
+.services__title {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3.5vw, var(--text-5xl));
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.05;
+}
+
+.services__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+.service-card {
+  border: 1px solid var(--border-dark);
+  padding: var(--space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: border-color 0.25s ease;
+}
+
+.service-card:hover {
+  border-color: rgba(221,166,58,0.4);
+}
+
+.service-card__icon {
+  width: 28px;
+  height: 28px;
+  color: var(--gold);
+}
+
+.service-card__title {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.service-card__text {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--text-on-dark);
+  line-height: 1.75;
+}
+
+
+/* ============================================================
+   GALERÍA — EL SANTUARIO
+   ============================================================ */
+
+.gallery {
+  background: var(--black);
+  padding: var(--space-20) var(--space-16);
+}
+
+.gallery__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: var(--space-8);
+}
+
+/* grid asimétrico: columna izquierda con imagen grande + columna derecha con dos imágenes apiladas */
+.gallery__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-3);
+  height: 560px; /* altura fija para que la cuadrícula sea consistente */
+}
+
+.gallery__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+  overflow: hidden;
+}
+
+/* la imagen grande ocupa las dos filas de la columna izquierda */
+.gallery__img--large {
+  grid-row: span 2;
+}
+
+/* zoom sutil al pasar el cursor — necesita overflow: hidden en el contenedor
+   pero como el img está dentro del grid directamente, se envuelve el efecto con filter */
+.gallery__img:hover {
+  transform: scale(1.02);
+}
+
+
+/* ============================================================
+   CASOS DE ÉXITO
+   ============================================================ */
+
+.cases {
+  background: var(--beige);
+  color: var(--text); /* sección clara — sobreescribe el blanco del body */
+  padding: var(--space-20) var(--space-16);
+}
+
+.cases__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-3);
+}
+
+.cases__title {
+  font-family: var(--font-body);
+  font-size: clamp(1.75rem, 3vw, var(--text-4xl));
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+  margin-bottom: var(--space-12);
+}
+
+.cases__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.case-card {
+  overflow: hidden;
+  position: relative;
+}
+
+/* fotos antes/después en fila dentro de la card */
+.case-card__photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* dos fotos iguales lado a lado */
+  height: 420px;
+}
+
+.case-card__photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top; /* prioriza la cara/torso en vez de recortar por arriba */
+}
+
+/* separador dorado vertical entre las dos fotos —
+   se consigue añadiendo un borde derecho a la primera imagen */
+.case-card__photos img:first-child {
+  border-right: 2px solid var(--gold);
+}
+
+/* overlay sobre la foto — posición absoluta en el borde inferior */
+.case-card__body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-4) var(--space-6);
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.case-card__meta {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.case-card__title {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+
+/* ============================================================
+   CTA FINAL — FONDO DORADO
+   ============================================================ */
+
+.gym-cta {
+  background: var(--gold);
+  padding: var(--space-24) var(--space-16);
+  text-align: center;
+}
+
+.gym-cta__title {
+  font-family: var(--font-body);
+  font-size: clamp(2.5rem, 6vw, var(--text-7xl));
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--black);
+  line-height: 1.0;
+  margin-bottom: var(--space-6);
+}
+
+.gym-cta__subtitle {
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: rgba(0,0,0,0.7);
+  max-width: 480px;
+  margin: 0 auto var(--space-10);
+  line-height: 1.7;
+}
+
+/* botón oscuro sobre dorado — no puede usar btn-primary (que es dorado)
+   ni btn-secondary (que es blanco sobre oscuro) */
+.gym-cta__btn {
+  display: inline-block;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-radius: 2px;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.gym-cta__btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.gym-cta__btn:hover {
+  background: var(--off-black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.gym-cta__btn:hover::after {
+  left: 150%;
+}
+
+.gym-cta__btn:active {
+  transform: scale(0.96);
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+
+  .hero__image {
+    width: 100%;
+    opacity: 0.6;
+    object-position: 30% center;
+  }
+
+  .hero__overlay {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .services__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .gallery {
+    padding: var(--space-16) var(--space-8);
+  }
+
+  .gallery__grid {
+    height: 400px;
+  }
+
+  .cases__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .services,
+  .cases {
+    padding: var(--space-16) var(--space-8);
+  }
+}
+
+@media (max-width: 767px) {
+
+  .hero__image {
+    width: 100%;
+    opacity: 0.6;
+    object-position: 30% center;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr); /* de 4 a 2 columnas en móvil */
+  }
+
+  /* los items de la segunda fila no tienen borde superior en desktop
+     pero al reorganizarse en 2 columnas necesitan separación */
+  .stats__item:nth-child(3) {
+    border-top: 1px solid var(--border-dark);
+  }
+
+  .stats__item:nth-child(3),
+  .stats__item:nth-child(4) {
+    border-top: 1px solid var(--border-dark);
+  }
+
+  .services,
+  .gallery,
+  .cases,
+  .gym-cta {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .services__grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* en móvil la galería se apila en una sola columna */
+  .gallery__grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    height: auto;
+  }
+
+  .gallery__img--large {
+    grid-row: auto;
+  }
+
+  .gallery__img {
+    aspect-ratio: 16 / 9;
+    height: auto;
+  }
+
+  .cases__grid {
+    grid-template-columns: 1fr;
+  }
+}

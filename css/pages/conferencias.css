@@ -1,0 +1,587 @@
+/* ============================================================
+   HERO — layout diferente al resto de páginas
+   aquí la imagen está a la IZQUIERDA y el contenido a la DERECHA,
+   en lugar del overlay habitual con imagen de fondo
+   ============================================================ */
+
+.conf-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr; /* imagen ocupa algo más que el contenido */
+  min-height: 100vh;
+  background: var(--black);
+  padding-top: var(--nav-height); /* empuja el contenido hacia abajo para no quedar bajo el nav fijo */
+}
+
+.conf-hero__image-wrap {
+  overflow: hidden; /* recorta la imagen si es más grande que su contenedor */
+  position: relative;
+}
+
+.conf-hero__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.conf-hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--space-16) var(--space-12) var(--space-16) var(--space-12);
+  gap: var(--space-6);
+}
+
+.conf-hero__badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 0.3rem 0.8rem;
+  align-self: flex-start; /* impide que el badge se estire al ancho completo de la columna */
+}
+
+.conf-hero__title {
+  font-family: var(--font-body);
+  font-size: clamp(2rem, 4vw, var(--text-6xl));
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--white);
+  line-height: 1.0;
+}
+
+.conf-hero__subtitle {
+  font-size: var(--text-base);
+  font-weight: 300;
+  color: var(--text-on-dark);
+  line-height: 1.75;
+}
+
+/* stats debajo del botón CTA — separador visual con borde superior */
+.conf-hero__stats {
+  display: flex;
+  gap: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--border-dark);
+  margin-top: var(--space-2);
+  justify-content: center;
+}
+
+.conf-hero__stat-value {
+  font-family: var(--font-body);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: var(--space-1);
+  text-align: center;
+}
+
+.conf-hero__stat-label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-on-dark);
+}
+
+
+/* ============================================================
+   LOGOS CLIENTES
+   ============================================================ */
+
+.clients {
+  background: var(--off-black);
+  padding: var(--space-12) var(--space-8);
+  text-align: center;
+  border-top: 1px solid var(--border-dark);
+  border-bottom: 1px solid var(--border-dark);
+}
+
+.clients__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-6);
+}
+
+/* logos como texto tipográfico hasta que Alex facilite los archivos reales */
+.clients__logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-12);
+  flex-wrap: wrap;
+}
+
+.clients__logo {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  /* color muy apagado — los logos reales tendrán su propia opacidad o serán en blanco */
+  color: rgba(255,255,255,0.35);
+  transition: color 0.2s ease;
+}
+
+.clients__logo:hover {
+  color: rgba(255,255,255,0.7);
+}
+
+
+/* ============================================================
+   SPEAKING REEL
+   ============================================================ */
+
+.reel {
+  background: var(--black);
+  padding: var(--space-20) var(--space-16);
+}
+
+.reel__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-8);
+}
+
+.reel__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.reel__label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
+
+/* max-width controla la altura indirectamente — a 16:9, 860px de ancho = ~484px de alto */
+.reel__video {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.reel__video iframe {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: none;
+  display: block;
+}
+
+.reel__play {
+  display: block;
+  position: relative; /* necesario para que .reel__play-btn (absolute) se posicione dentro */
+}
+
+.reel__thumbnail {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  /* filtro que oscurece la miniatura para que el botón de play resalte mejor */
+  filter: brightness(0.6);
+  transition: filter 0.3s ease;
+}
+
+.reel__play:hover .reel__thumbnail {
+  filter: brightness(0.45);
+}
+
+/* botón de play centrado — usa position absolute + transform para centrarlo
+   tanto horizontal como verticalmente sobre la imagen */
+.reel__play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 72px;
+  height: 72px;
+  background: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.reel__play:hover .reel__play-btn {
+  background: var(--gold-light);
+  transform: translate(-50%, -50%) scale(1.08); /* ligero zoom en hover */
+}
+
+.reel__play-btn svg {
+  width: 28px;
+  height: 28px;
+  color: var(--black);
+  /* el triángulo de play tiene un pequeño offset visual hacia la derecha —
+     se compensa con margin para que parezca centrado ópticamente */
+  margin-left: 4px;
+}
+
+
+/* ============================================================
+   TEMAS KEYNOTE
+   ============================================================ */
+
+.topics {
+  background: var(--off-black);
+  padding: var(--space-20) var(--space-16);
+}
+
+.topics__header {
+  margin-bottom: var(--space-12);
+}
+
+.topics__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3.5vw, var(--text-5xl));
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: var(--space-2);
+}
+
+.topics__subtitle {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--text-on-dark);
+}
+
+.topics__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+}
+
+.topic-card {
+  border: 1px solid var(--border-dark);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  transition: border-color 0.25s ease;
+}
+
+.topic-card:hover {
+  border-color: rgba(221,166,58,0.4);
+}
+
+.topic-card__tags {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* etiquetas en pill — border-radius alto para forma redondeada */
+.topic-card__tag {
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(221,166,58,0.4);
+  border-radius: 100px; /* valor alto = pill — más mantenible que 50% en elementos con texto */
+  padding: 0.2rem 0.6rem;
+}
+
+.topic-card__title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.topic-card__text {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: var(--text-on-dark);
+  line-height: 1.7;
+}
+
+
+/* ============================================================
+   TESTIMONIOS — overrides (base en components.css)
+   ============================================================ */
+
+.testimonials { background: var(--black); }
+
+.testimonials__title { margin-bottom: var(--space-3); }
+
+/* hover más elaborado que el base — relleno dorado + elevación */
+.testimonials__prev,
+.testimonials__next {
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.testimonials__prev:hover,
+.testimonials__next:hover {
+  color: var(--black);
+  background: var(--gold);
+  transform: translateY(-2px);
+}
+
+.testimonials__prev:active,
+.testimonials__next:active {
+  transform: scale(0.92);
+}
+
+
+/* ============================================================
+   FORMULARIO — FONDO DORADO CON IMAGEN
+   ============================================================ */
+
+.contact-form {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 0; /* sin gap — las columnas se tocan para efecto limpio */
+  background: var(--gold);
+  color: var(--black);
+}
+
+.contact-form__media {
+  position: relative;
+  overflow: hidden;
+  min-height: 480px; /* garantiza altura mínima si el formulario tiene poco contenido */
+}
+
+.contact-form__media img {
+  /* position: absolute + inset: 0 es el patrón estándar para que una imagen llene
+     su contenedor sin depender de height: 100%, que falla cuando el padre no tiene
+     altura explícita definida — aquí la altura la marca la columna del formulario */
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: left top;
+  filter: brightness(0.55);
+}
+
+/* caption superpuesto en la parte inferior de la imagen */
+.contact-form__media-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--space-6);
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.contact-form__media-title {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: var(--space-1);
+}
+
+.contact-form__media-meta {
+  font-size: var(--text-xs);
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 0.06em;
+}
+
+.contact-form__body {
+  padding: var(--space-16) var(--space-12);
+}
+
+.contact-form__title {
+  font-family: var(--font-heading);
+  font-size: clamp(2rem, 3vw, var(--text-5xl));
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.05;
+  margin-bottom: var(--space-4);
+}
+
+.contact-form__title em {
+  font-style: italic;
+  font-weight: 300;
+}
+
+.contact-form__desc {
+  font-size: var(--text-sm);
+  font-weight: 300;
+  color: rgba(0,0,0,0.7);
+  line-height: 1.75;
+  margin-bottom: var(--space-8);
+}
+
+.contact-form__body form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.contact-form__field label {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.8);
+}
+
+.contact-form__field input {
+  background: rgba(0,0,0,0.08);
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 2px;
+  padding: 0.75rem var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--black);
+  transition: border-color 0.2s ease;
+}
+
+.contact-form__field input:focus,
+.contact-form__field input:hover {
+  outline: none;
+  border-color: var(--black);
+}
+
+/* botón oscuro sobre fondo dorado — no usa btn-primary porque ese es dorado */
+.contact-form__submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contact-form__submit::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.1), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.5s ease;
+}
+
+.contact-form__submit:hover {
+  background: var(--off-black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.contact-form__submit:hover::after {
+  left: 150%;
+}
+
+.contact-form__submit:active {
+  transform: scale(0.96);
+  box-shadow: none;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1023px) {
+
+  /* el hero split se apila: imagen arriba, contenido abajo */
+  .conf-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .conf-hero__image-wrap {
+    height: 50vh; /* altura fija para la imagen en tablet */
+  }
+
+  .conf-hero__content {
+    padding: var(--space-12) var(--space-8);
+  }
+
+  .topics__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-form {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__media {
+    height: 300px;
+  }
+
+  .reel,
+  .topics,
+  .testimonials {
+    padding: var(--space-16) var(--space-8);
+  }
+}
+
+@media (max-width: 767px) {
+
+  .conf-hero__image-wrap {
+    height: 40vh;
+  }
+
+  .conf-hero__content {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .conf-hero__stats {
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .clients__logos {
+    gap: var(--space-6);
+  }
+
+  .reel,
+  .topics,
+  .testimonials {
+    padding: var(--space-12) var(--space-4);
+  }
+
+  .topics__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form__body {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .contact-form__media img {
+    object-position: right center;
+  }
+}
