@@ -33,6 +33,11 @@
 
 .bento-card {
   padding: var(--space-8);
+  transition: transform 0.12s ease;
+}
+
+.bento-card:active {
+  transform: scale(0.97);
 }
 
 .bento-card--light { background: var(--white);      color: var(--text); }
@@ -313,6 +318,7 @@
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.5);
 }
 
+
 .pricing-card:hover::before {
   transform: scaleX(1);
 }
@@ -520,6 +526,11 @@
   font-size: var(--text-sm);
   color: var(--black);
   transition: border-color 0.2s ease;
+}
+
+.contact-form__field input::placeholder,
+.contact-form__field textarea::placeholder {
+  color: rgba(0,0,0,0.5);
 }
 
 .contact-form__field input:focus,

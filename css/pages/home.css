@@ -36,10 +36,15 @@
 .pillar-card {
   border: 1px solid var(--border-dark);
   padding: var(--space-8);
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.12s ease;
 }
 
 .pillar-card:hover {
+  border-color: rgba(221, 166, 58, 0.5);
+}
+
+.pillar-card:active {
+  transform: scale(0.97);
   border-color: rgba(221, 166, 58, 0.5);
 }
 
@@ -268,7 +273,7 @@
 }
 
 .cta__input::placeholder {
-  color: rgba(0, 0, 0, 0.45);
+  color: rgba(0, 0, 0, 0.55);
 }
 
 .cta__input:focus, .cta__input:hover {

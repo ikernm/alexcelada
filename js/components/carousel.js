@@ -81,3 +81,69 @@ document.querySelectorAll('.testimonials').forEach(section => {
 
   update(); // estado inicial
 });
+
+
+/* ============================================================
+   CAROUSEL DE CASOS DE ÉXITO
+
+   Igual que el de testimonios pero con breakpoints distintos:
+   desktop (≥1024px) muestra los 3, tablet muestra 2, móvil 1.
+   Los botones de nav se ocultan en desktop vía CSS.
+   ============================================================ */
+
+document.querySelectorAll('.cases').forEach(section => {
+
+  const cards   = [...section.querySelectorAll('.case-card')];
+  const prevBtn = section.querySelector('.cases__prev');
+  const nextBtn = section.querySelector('.cases__next');
+
+  if (!prevBtn || !nextBtn || cards.length <= 1) return;
+
+  let index = 0;
+
+  function visibleCount() {
+    if (window.matchMedia('(min-width: 1024px)').matches) return 3;
+    return 2; // tablet y móvil
+  }
+
+  function update() {
+    const n = visibleCount();
+    cards.forEach((card, i) => {
+      card.style.display = (i >= index && i < index + n) ? '' : 'none';
+    });
+    prevBtn.disabled = index === 0;
+    nextBtn.disabled = index + n >= cards.length;
+    prevBtn.style.opacity = prevBtn.disabled ? '0.3' : '1';
+    nextBtn.style.opacity = nextBtn.disabled ? '0.3' : '1';
+  }
+
+  prevBtn.addEventListener('click', () => {
+    index = Math.max(0, index - visibleCount());
+    update();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    index = Math.min(cards.length - visibleCount(), index + visibleCount());
+    update();
+  });
+
+  window.addEventListener('resize', () => {
+    index = 0;
+    update();
+  }, { passive: true });
+
+  let touchStartX = 0;
+
+  section.addEventListener('touchstart', e => {
+    touchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  section.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) < 50) return;
+    if (diff > 0) nextBtn.click();
+    else          prevBtn.click();
+  }, { passive: true });
+
+  update();
+});

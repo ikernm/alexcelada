@@ -167,7 +167,7 @@
 
 .contact-hero__field input::placeholder,
 .contact-hero__field textarea::placeholder {
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
 }
 
 /* las opciones del select heredan el color del sistema en algunos navegadores

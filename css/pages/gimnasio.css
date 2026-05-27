@@ -104,10 +104,15 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, transform 0.12s ease;
 }
 
 .service-card:hover {
+  border-color: rgba(221,166,58,0.4);
+}
+
+.service-card:active {
+  transform: scale(0.97);
   border-color: rgba(221,166,58,0.4);
 }
 
@@ -209,10 +214,49 @@
   font-weight: 700;
   text-transform: uppercase;
   color: var(--text);
+}
+
+.cases__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
   margin-bottom: var(--space-12);
 }
 
-.cases__grid {
+.cases__nav {
+  display: flex;
+  gap: var(--space-2);
+}
+
+
+.cases__prev,
+.cases__next {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+}
+
+.cases__prev:hover,
+.cases__next:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: translateY(-2px);
+}
+
+.cases__prev:active,
+.cases__next:active {
+  transform: scale(0.92);
+}
+
+.cases__track {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--space-6);
@@ -221,6 +265,11 @@
 .case-card {
   overflow: hidden;
   position: relative;
+  transition: transform 0.12s ease;
+}
+
+.case-card:active {
+  transform: scale(0.97);
 }
 
 /* fotos antes/después en fila dentro de la card */
@@ -378,7 +427,7 @@
     height: 400px;
   }
 
-  .cases__grid {
+  .cases__track {
     grid-template-columns: repeat(2, 1fr);
   }
 
@@ -438,7 +487,7 @@
     height: auto;
   }
 
-  .cases__grid {
+  .cases__track {
     grid-template-columns: 1fr;
   }
 }

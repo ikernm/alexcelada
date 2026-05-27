@@ -44,3 +44,7 @@ document.addEventListener('click', (e) => {
 window.addEventListener('scroll', () => {
   nav.classList.toggle('nav--scrolled', window.scrollY > 20);
 }, { passive: true });
+
+/* Activa :active en iOS para elementos que no son <a> ni <button> (cards, artículos, etc.)
+   Sin esto, Safari no dispara :active en divs ni articles al tocarlos */
+document.addEventListener('touchstart', () => {}, { passive: true });
