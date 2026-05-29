@@ -152,6 +152,10 @@
   font-size: var(--text-xs);
 }
 
+.nav__cta-item {
+  display: none; /* oculto en desktop — el .nav__cta de fuera ya lo cubre */
+}
+
 /* Botón hamburguesa — oculto en desktop, visible en móvil */
 .nav__toggle {
   display: none;
@@ -352,6 +356,34 @@
   .nav__toggle {
     display: flex;
   }
+
+  .nav__cta-item {
+    display: block;
+    width: 100%;
+    padding-top: var(--space-6);
+    margin-top: var(--space-2);
+  }
+
+  .nav__cta-item .btn-primary {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
+
+  .nav__overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    z-index: 99; /* justo debajo del nav (z-index: 100) */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .nav__overlay--visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
 }
 
 @media (max-width: 767px) {
@@ -453,6 +485,42 @@
   flex-wrap: wrap;
 }
 
+.hero__scroll-indicator {
+  display: none; /* solo visible en móvil/tablet */
+  position: absolute;
+  bottom: var(--space-8);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+  animation: scroll-bounce 1.8s ease-in-out infinite;
+}
+
+.hero__scroll-indicator svg {
+  width: 28px;
+  height: 28px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.hero__scroll-indicator--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes scroll-bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(9px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero__scroll-indicator { animation: none; }
+}
+
+@media (max-width: 767px) {
+  .hero__scroll-indicator { display: block; }
+}
+
 
 /* ============================================================
    TESTIMONIOS
@@ -529,6 +597,12 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   background: rgba(255, 255, 255, 0.04);
   padding: var(--space-8);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.testimonial-card:hover {
+  transform: scale(0.96);
+  border-color: rgba(221, 166, 58, 0.35);
 }
 
 .testimonial-card__stars {

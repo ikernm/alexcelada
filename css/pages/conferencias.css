@@ -344,6 +344,7 @@
   position: relative;
   overflow: hidden;
   min-height: 480px; /* garantiza altura mínima si el formulario tiene poco contenido */
+  background: var(--black);
 }
 
 .contact-form__media img {
@@ -533,6 +534,17 @@
   .topics,
   .testimonials {
     padding: var(--space-16) var(--space-8);
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1600px) {
+  .contact-form__media img {
+    height: 600px;
+    width: auto;
+    object-position: 10% center;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
   }
 }
 

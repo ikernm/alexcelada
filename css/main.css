@@ -85,7 +85,14 @@ body {
   background-color: var(--black); /* dark-first: las secciones claras sobreescriben con .section--light */
   line-height: 1.6;
   -webkit-font-smoothing: antialiased; /* mejora el renderizado de texto claro sobre fondo oscuro */
+  scrollbar-color: var(--gold) var(--off-black); /* Firefox */
 }
+
+/* Chrome / Edge / Safari */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--off-black); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold-light); }
 
 img {
   max-width: 100%;

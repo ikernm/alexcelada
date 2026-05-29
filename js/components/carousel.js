@@ -47,17 +47,21 @@ document.querySelectorAll('.testimonials').forEach(section => {
   prevBtn.addEventListener('click', () => {
     index = Math.max(0, index - visibleCount());
     update();
+    prevBtn.blur();
   });
 
   nextBtn.addEventListener('click', () => {
     index = Math.min(cards.length - visibleCount(), index + visibleCount());
     update();
+    nextBtn.blur();
   });
 
-  // al redimensionar la ventana se reinicia al primer grupo para evitar
-  // estados inconsistentes (ej: estar en el grupo 3 y pasar a mobile con 1 visible)
+  // Solo reinicia si el índice actual quedaría fuera de rango con el nuevo visibleCount.
+  // Evita que iOS Safari resetee el carrusel al colapsar/expandir la barra de URL
+  // (ese gesto dispara un evento resize aunque el ancho de pantalla no haya cambiado).
   window.addEventListener('resize', () => {
-    index = 0;
+    const n = visibleCount();
+    if (index + n > cards.length) index = Math.max(0, cards.length - n);
     update();
   }, { passive: true });
 
@@ -69,7 +73,10 @@ document.querySelectorAll('.testimonials').forEach(section => {
     touchStartX = e.touches[0].clientX;
   }, { passive: true });
 
+  // Ignora el evento si el toque fue sobre un botón de navegación —
+  // evita que el swipe handler compita con el click del botón
   section.addEventListener('touchend', e => {
+    if (e.target === prevBtn || e.target === nextBtn) return;
     const diff = touchStartX - e.changedTouches[0].clientX;
 
     // solo actúa si el desplazamiento supera 50px — evita swipes accidentales
@@ -87,8 +94,7 @@ document.querySelectorAll('.testimonials').forEach(section => {
    CAROUSEL DE CASOS DE ÉXITO
 
    Igual que el de testimonios pero con breakpoints distintos:
-   desktop (≥1024px) muestra los 3, tablet muestra 2, móvil 1.
-   Los botones de nav se ocultan en desktop vía CSS.
+   desktop (≥1024px) muestra los 3, tablet muestra 2, móvil 2 apilados.
    ============================================================ */
 
 document.querySelectorAll('.cases').forEach(section => {
@@ -120,15 +126,19 @@ document.querySelectorAll('.cases').forEach(section => {
   prevBtn.addEventListener('click', () => {
     index = Math.max(0, index - visibleCount());
     update();
+    prevBtn.blur();
   });
 
   nextBtn.addEventListener('click', () => {
     index = Math.min(cards.length - visibleCount(), index + visibleCount());
     update();
+    nextBtn.blur();
   });
 
+  // Solo reinicia si el índice actual quedaría fuera de rango con el nuevo visibleCount
   window.addEventListener('resize', () => {
-    index = 0;
+    const n = visibleCount();
+    if (index + n > cards.length) index = Math.max(0, cards.length - n);
     update();
   }, { passive: true });
 
@@ -139,6 +149,7 @@ document.querySelectorAll('.cases').forEach(section => {
   }, { passive: true });
 
   section.addEventListener('touchend', e => {
+    if (e.target === prevBtn || e.target === nextBtn) return;
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) < 50) return;
     if (diff > 0) nextBtn.click();

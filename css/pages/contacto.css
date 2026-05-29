@@ -1,3 +1,12 @@
+/* Sin botón CTA en el nav — recentramos los links con absolute */
+@media (min-width: 768px) {
+  .nav .nav__links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
 /* ============================================================
    CONTACT HERO
    sección única: portrait de Alex como fondo + contenido a la
